@@ -1,4 +1,4 @@
-package com.flydean02;
+package com.flydean02.bytebuf;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.flydean01;
+package com.flydean01.first;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

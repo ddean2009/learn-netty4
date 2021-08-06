@@ -1,4 +1,4 @@
-package com.flydean01;
+package com.flydean01.first;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
