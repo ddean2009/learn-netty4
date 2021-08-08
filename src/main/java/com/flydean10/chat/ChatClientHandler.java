@@ -1,17 +1,20 @@
-
-package com.flydean09.reconnect;
+package com.flydean10.chat;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 客户端处理器
+ */
 @Sharable
 @Slf4j
-public class ReconnectServerHandler extends SimpleChannelInboundHandler<Object> {
+public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
+
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-       // 读取消息
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        log.info("接收到消息:{}",msg);
     }
 
     @Override

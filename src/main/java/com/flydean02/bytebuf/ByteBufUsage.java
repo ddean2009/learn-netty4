@@ -1,9 +1,7 @@
 package com.flydean02.bytebuf;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 
-import java.nio.ByteBuffer;
 import java.util.Random;
 
 import static io.netty.buffer.Unpooled.*;
@@ -19,7 +17,6 @@ public class ByteBufUsage {
         ByteBuf heapBuffer    = buffer(128);
         ByteBuf directBuffer  = directBuffer(256);
         ByteBuf wrappedBuffer = wrappedBuffer(new byte[128], new byte[256]);
-        ByteBuf copiedBuffer  = copiedBuffer(ByteBuffer.allocate(128));
 
         //随机访问
         ByteBuf buffer = heapBuffer;
