@@ -27,7 +27,6 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
         // 添加String Decoder和String Encoder,用来进行字符串的转换
         pipeline.addLast(DECODER);
         pipeline.addLast(ENCODER);
-
         // 最后添加真正的处理器
         pipeline.addLast(SERVER_HANDLER);
     }

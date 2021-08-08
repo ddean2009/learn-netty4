@@ -18,7 +18,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // channel活跃
-        ctx.write("Channel Active状态!");
+        ctx.write("Channel Active状态!\r\n");
         ctx.flush();
     }
 
@@ -39,7 +39,6 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
         // 写入消息
         ChannelFuture future = ctx.write(response);
-
         // 添加CLOSE listener，用来关闭channel
         if (close) {
             future.addListener(ChannelFutureListener.CLOSE);
