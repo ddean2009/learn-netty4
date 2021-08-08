@@ -39,10 +39,8 @@ public final class ChatClient {
                 if (line == null) {
                     break;
                 }
-
                 // 将从命令行输入的一行字符写到channel中
                 lastWriteFuture = ch.writeAndFlush(line + "\r\n");
-
                 // 如果输入'再见'，则等待server端关闭channel
                 if ("再见".equalsIgnoreCase(line)) {
                     ch.closeFuture().sync();
