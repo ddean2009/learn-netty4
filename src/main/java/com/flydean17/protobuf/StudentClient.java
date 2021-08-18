@@ -27,16 +27,10 @@ public final class StudentClient {
             b.group(group)
              .channel(NioSocketChannel.class)
              .handler(new StudentClientInitializer());
-
             // 建立连接
             Channel ch = b.connect(HOST, PORT).sync().channel();
-
-            // 获取handler
-            StudentClientHandler handler = ch.pipeline().get(StudentClientHandler.class);
-
-            // 关闭连接
-            ch.close();
-
+            // 等待关闭
+            ch.closeFuture().sync();
         } finally {
             group.shutdownGracefully();
         }
