@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.flydean17.protobuf;
+
+option java_multiple_files = true;
+option java_package = "com.flydean17.protobuf";
+//option java_outer_classname = "StudentWrapper";
+
+message Student {
+  optional int32 age = 1;
+  optional string name =2;
+}
