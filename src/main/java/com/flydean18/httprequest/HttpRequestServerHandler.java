@@ -47,9 +47,7 @@ public class HttpRequestServerHandler extends SimpleChannelInboundHandler<HttpOb
                 // 如果keepAlive是false，则设置header connection=close
                 response.headers().set(CONNECTION, CLOSE);
             }
-
             ChannelFuture f = ctx.write(response);
-
             if (!keepAlive) {
                 f.addListener(ChannelFutureListener.CLOSE);
             }
