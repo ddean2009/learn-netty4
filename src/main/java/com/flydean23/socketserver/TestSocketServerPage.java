@@ -12,7 +12,7 @@ import java.io.*;
  * 读取html页面的数据，展示给用户
  */
 @Slf4j
-public final class WebSocketServerTestPage {
+public final class TestSocketServerPage {
 
     public static ByteBuf getContent() throws IOException {
         File file = new File("socket.html");
@@ -26,6 +26,6 @@ public final class WebSocketServerTestPage {
         return Unpooled.copiedBuffer(builder.toString(), CharsetUtil.UTF_8);
     }
 
-    private WebSocketServerTestPage() {
+    private TestSocketServerPage() {
     }
 }

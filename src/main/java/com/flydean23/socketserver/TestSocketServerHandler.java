@@ -20,7 +20,7 @@ import static io.netty.handler.codec.http.HttpResponseStatus.*;
  * 同时处理消息和
  */
 @Slf4j
-public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> {
+public class TestSocketServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private static final String WEBSOCKET_PATH = "/websocket";
 
@@ -58,7 +58,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
         // 发送测试页面
         if ("/".equals(req.uri())) {
-            ByteBuf content = WebSocketServerTestPage.getContent();
+            ByteBuf content = TestSocketServerPage.getContent();
             FullHttpResponse res = new DefaultFullHttpResponse(req.protocolVersion(), OK, content);
 
             res.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");

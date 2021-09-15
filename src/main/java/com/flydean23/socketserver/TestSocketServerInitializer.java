@@ -9,7 +9,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 
 /**
  */
-public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel> {
+public class TestSocketServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     public void initChannel(SocketChannel ch) throws Exception {
@@ -17,6 +17,6 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
 
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(65536));
-        pipeline.addLast(new WebSocketServerHandler());
+        pipeline.addLast(new TestSocketServerHandler());
     }
 }

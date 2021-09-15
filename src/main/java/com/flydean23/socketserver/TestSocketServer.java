@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-public final class WebSocketServer {
+public final class TestSocketServer {
 
     static final int PORT = Integer.parseInt(System.getProperty("port", "8000"));
 
@@ -22,7 +22,7 @@ public final class WebSocketServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
              .channel(NioServerSocketChannel.class)
-             .childHandler(new WebSocketServerInitializer());
+             .childHandler(new TestSocketServerInitializer());
 
             Channel ch = b.bind(PORT).sync().channel();
 
