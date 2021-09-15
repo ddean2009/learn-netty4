@@ -1,21 +1,21 @@
 
-package com.flydean23.socketserver;
+package com.flydean24.socketserver2;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-/**
- * 读取html页面的数据，展示给用户
- */
 @Slf4j
-public final class TestSocketServerPage {
+public final class Server2HttpPage {
 
     public static ByteBuf getContent() throws IOException {
-        File file = new File("socket.html");
+        File file = new File("socket2.html");
         log.info(file.getCanonicalPath());
         FileReader fileReader = new FileReader(file);
         BufferedReader reader  = new BufferedReader(fileReader);
@@ -26,6 +26,6 @@ public final class TestSocketServerPage {
         return Unpooled.copiedBuffer(builder.toString(), CharsetUtil.UTF_8);
     }
 
-    private TestSocketServerPage() {
+    private Server2HttpPage() {
     }
 }

@@ -1,0 +1,42 @@
+<html><head><title>分离websocket处理器</title></head>
+<body>
+<script type="text/javascript">
+    var socket;
+    if (!window.WebSocket) {
+        window.WebSocket = window.MozWebSocket;
+    }
+    if (window.WebSocket) {
+        socket = new WebSocket("ws://127.0.0.1:8000/websocket");
+        socket.onmessage = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = ta.value + '\n' + event.data
+        };
+        socket.onopen = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = "打开Web Socket!";
+        };
+        socket.onclose = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = ta.value + "关闭Web Socket!";
+        };
+    } else {
+        alert("该浏览器不支持Web Socket.");
+    }
+
+    function send(message) {
+        if (!window.WebSocket) { return; }
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.send(message);
+        } else {
+            alert("socket未打开");
+        }
+    }
+</script>
+<form onsubmit="return false;">
+    <input type="text" name="message" value="大家好，我是web socket!"/><input type="button" value="发送websocket数据"
+                                                                    onclick="send(this.form.message.value)" />
+    <h3>输出:</h3>
+    <textarea id="responseText" style="width:500px;height:300px;"></textarea>
+</form>
+</body>
+</html>

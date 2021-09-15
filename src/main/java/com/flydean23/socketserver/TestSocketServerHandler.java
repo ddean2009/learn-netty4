@@ -58,7 +58,7 @@ public class TestSocketServerHandler extends SimpleChannelInboundHandler<Object>
 
         // 发送测试页面
         if ("/".equals(req.uri())) {
-            ByteBuf content = TestSocketServerPage.getContent();
+            ByteBuf content = TestSocketHttpPage.getContent();
             FullHttpResponse res = new DefaultFullHttpResponse(req.protocolVersion(), OK, content);
 
             res.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
