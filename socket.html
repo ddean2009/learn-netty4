@@ -1,0 +1,139 @@
+<html><head><title>Web Socket测试页面</title></head>
+<body>
+<h2>Web Socket测试页面</h2>
+<label>连接状态:</label>
+<label id="connectionLabel"></label><br />
+<form onsubmit="return false;">
+    消息大小:<input type="text" id="messageSize" value="1024"/><br>
+    消息数目:<input type="text" id="nrMessages" value="100"/><br>
+    消息类型:<input type="radio" name="type" id="typeText" value="text" checked>文本<input type="radio" name="type" id="typeBinary" value="binary">二进制<br>
+    模式:<br>
+    <input type="radio" name="mode" id="modeSingle" value="single" checked>一次发送一条消息<br>
+    <input type="radio" name="mode" id="modeAll" value="all">将所有消息合并一起发送<br>
+    <input type="checkbox" id="verifiyResponses">验证返回的响应<br>
+    <input type="button" value="开始测试"
+           onclick="startBenchmark()" />
+    <h3>Output</h3>
+    <textarea id="output" style="width:500px;height:300px;"></textarea>
+    <br>
+    <input type="button" value="Clear" onclick="clearText()">
+</form>
+<script type="text/javascript">
+    var benchRunning = false;
+    var messageSize = 0;
+    var totalMessages = 0;
+    var rcvdMessages = 0;
+    var isBinary = true;
+    var isSingle = true;
+    var verifiyResponses = false;
+    var benchData = null;
+    var startTime;
+    var endTime;
+    var socket;
+    var output = document.getElementById('output');
+    var connectionLabel = document.getElementById('connectionLabel');
+    if (!window.WebSocket) {
+        window.WebSocket = window.MozWebSocket;
+    }
+    if (window.WebSocket) {
+        socket = new WebSocket("ws://127.0.0.1:8000/websocket");
+        socket.binaryType = 'arraybuffer';
+        socket.onmessage = function(event) {
+            if (verifiyResponses) {
+                if (isBinary) {
+                    if (!(event.data instanceof ArrayBuffer) ||
+                        event.data.byteLength != benchData.byteLength) {
+                        onInvalidResponse(benchData, event.data);
+                        return;
+                    } else {
+                        var v = new Uint8Array(event.data);
+                        for (var j = 0; j < benchData.byteLength; j++) {
+                            if (v[j] != benchData[j]) {
+                                onInvalidResponse(benchData, event.data);
+                                return;
+                            }
+                        }
+                    }
+                } else {
+                    if (event.data != benchData) {
+                        onInvalidResponse(benchData, event.data);
+                        return;
+                    }
+                }
+            }
+            rcvdMessages++;
+            if (rcvdMessages == totalMessages) {
+                onFinished();
+            } else if (isSingle) {
+                socket.send(benchData);
+            }
+        };
+        socket.onopen = function(event) {
+            connectionLabel.innerHTML = "已连接";
+        };
+        socket.onclose = function(event) {
+            benchRunning = false;
+            connectionLabel.innerHTML = "断开连接";
+        };
+    } else {
+        alert("该浏览器不支持Web Socket.");
+    }
+
+    function onInvalidResponse(sent,recvd) {
+        socket.close();
+        alert("Error: 发送的数据和接收的数据不匹配!");
+    }
+
+    function clearText() {
+        output.value="";
+    }
+
+    function createBenchData() {
+        if (isBinary) {
+            benchData = new Uint8Array(messageSize);
+            for (var i=0; i < messageSize; i++) {
+                benchData[i] += Math.floor(Math.random() * 255);
+            }
+        } else {
+            benchData = "";
+            for (var i=0; i < messageSize; i++) {
+                benchData += String.fromCharCode(Math.floor(Math.random() * (123 - 65) + 65));
+            }
+        }
+    }
+
+    function startBenchmark(message) {
+        if (!window.WebSocket || benchRunning) { return; }
+        if (socket.readyState == WebSocket.OPEN) {
+            isBinary = document.getElementById('typeBinary').checked;
+            isSingle = document.getElementById('modeSingle').checked;
+            verifiyResponses = document.getElementById('verifiyResponses').checked;
+            messageSize = parseInt(document.getElementById('messageSize').value);
+            totalMessages = parseInt(document.getElementById('nrMessages').value);
+            if (isNaN(messageSize) || isNaN(totalMessages)) return;
+            createBenchData();
+            output.value = output.value + '\n开始测试';
+            rcvdMessages = 0;
+            benchRunning = true;
+            startTime = new Date();
+            if (isSingle) {
+                socket.send(benchData);
+            } else {
+                for (var i = 0; i < totalMessages; i++) socket.send(benchData);
+            }
+        } else {
+            alert("socket未打开.");
+        }
+    }
+
+    function onFinished() {
+        endTime = new Date();
+        var duration = (endTime - startTime) / 1000.0;
+        output.value = output.value + '\n耗时: ' + duration + 's';
+        var messagesPerS = totalMessages / duration;
+        output.value = output.value + '\n消息处理速度: ' + messagesPerS + ' Messages/s';
+        benchRunning = false;
+    }
+</script>
+</body>
+</html>
