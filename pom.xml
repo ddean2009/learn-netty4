@@ -50,6 +50,23 @@
             <artifactId>protobuf-java-util</artifactId>
             <version>3.15.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.conscrypt</groupId>
+            <artifactId>conscrypt-openjdk-uber</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-tcnative -->
+        <!--  This artifact is dynamically linked to OpenSSL and Apache APR.-->
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-tcnative</artifactId>-->
+<!--            <version>2.0.40.Final</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative-boringssl-static</artifactId>
+            <version>2.0.40.Final</version>
+        </dependency>
     </dependencies>
 
 </project>
