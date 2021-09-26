@@ -30,7 +30,7 @@ public final class Http2ClientFrameInitializer extends ChannelInitializer<Channe
             ch.pipeline().addFirst(sslCtx.newHandler(ch.alloc()));
         }
 
-        final Http2FrameCodec http2FrameCodec = Http2FrameCodecBuilder.forClient()
+        Http2FrameCodec http2FrameCodec = Http2FrameCodecBuilder.forClient()
             .initialSettings(Http2Settings.defaultSettings())
             .build();
         ch.pipeline().addLast(http2FrameCodec);

@@ -35,7 +35,7 @@ public final class Http2FrameClient {
         // SSL配置
         final SslContext sslCtx;
         if (SSL) {
-            final SslProvider provider =
+            SslProvider provider =
                     SslProvider.isAlpnSupported(SslProvider.OPENSSL)? SslProvider.OPENSSL : SslProvider.JDK;
             sslCtx = SslContextBuilder.forClient()
                   .sslProvider(provider)
@@ -79,9 +79,7 @@ public final class Http2FrameClient {
             headers.path(PATH);
             headers.scheme(SSL? "https" : "http");
             Http2HeadersFrame headersFrame = new DefaultHttp2HeadersFrame(headers, true);
-            Http2HeadersFrame headersFrame2 = new DefaultHttp2HeadersFrame(headers, true);
             streamChannel.writeAndFlush(headersFrame);
-            channel.writeAndFlush(headersFrame2);
             log.info("发送 HTTP/2 GET 请求 " + PATH);
 
             // 等待响应结束或者超时
