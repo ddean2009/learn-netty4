@@ -64,6 +64,8 @@ public final class CustHttp2Handler extends Http2ConnectionHandler implements Ht
      */
     private void sendResponse(ChannelHandlerContext ctx, int streamId, ByteBuf payload) {
         Http2Headers headers = new DefaultHttp2Headers().status(OK.codeAsText());
+        //支持中文
+        headers.set(HttpHeaderNames.CONTENT_TYPE,"text/plain;charset=utf-8");
         encoder().writeHeaders(ctx, streamId, headers, 0, false, ctx.newPromise());
         encoder().writeData(ctx, streamId, payload, 0, true, ctx.newPromise());
     }
@@ -83,7 +85,7 @@ public final class CustHttp2Handler extends Http2ConnectionHandler implements Ht
         if (endOfStream) {
             ByteBuf content = ctx.alloc().buffer();
             content.writeBytes(RESPONSE_BYTES.duplicate());
-            ByteBufUtil.writeAscii(content, " - 使用 HTTP/2");
+            ByteBufUtil.writeUtf8(content, " - 使用 HTTP/2");
             sendResponse(ctx, streamId, content);
         }
     }

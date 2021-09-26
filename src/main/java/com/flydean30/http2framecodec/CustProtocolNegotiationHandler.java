@@ -1,9 +1,10 @@
 
-package com.flydean26.http2server;
+package com.flydean30.http2framecodec;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http2.Http2FrameCodecBuilder;
 import io.netty.handler.ssl.ApplicationProtocolNames;
 import io.netty.handler.ssl.ApplicationProtocolNegotiationHandler;
 
@@ -21,7 +22,7 @@ public class CustProtocolNegotiationHandler extends ApplicationProtocolNegotiati
     @Override
     protected void configurePipeline(ChannelHandlerContext ctx, String protocol) {
         if (ApplicationProtocolNames.HTTP_2.equals(protocol)) {
-            ctx.pipeline().addLast(new CustHttp2HandlerBuilder().build());
+            ctx.pipeline().addLast(Http2FrameCodecBuilder.forServer().build(), new CustHttp2Handler());
             return;
         }
 

@@ -1,5 +1,5 @@
 
-package com.flydean26.http2server;
+package com.flydean30.http2framecodec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
@@ -11,8 +11,11 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpUtil;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
+import static io.netty.buffer.Unpooled.copiedBuffer;
+import static io.netty.buffer.Unpooled.unreleasableBuffer;
 import static io.netty.handler.codec.http.HttpHeaderNames.*;
 import static io.netty.handler.codec.http.HttpHeaderValues.CLOSE;
 import static io.netty.handler.codec.http.HttpHeaderValues.KEEP_ALIVE;
@@ -20,13 +23,15 @@ import static io.netty.handler.codec.http.HttpResponseStatus.CONTINUE;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_0;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
-import static io.netty.util.internal.ObjectUtil.checkNotNull;
 
 /**
  * 处理HTTP1协议
  */
 @Slf4j
 public class CustHttp1Handler extends SimpleChannelInboundHandler<FullHttpRequest> {
+
+    static final ByteBuf RESPONSE_BYTES = unreleasableBuffer(copiedBuffer("我在使用HTTP2", CharsetUtil.UTF_8));
+
     private final String establishApproach;
 
     public CustHttp1Handler(String establishApproach) {
@@ -41,8 +46,8 @@ public class CustHttp1Handler extends SimpleChannelInboundHandler<FullHttpReques
         boolean keepAlive = HttpUtil.isKeepAlive(req);
 
         ByteBuf content = ctx.alloc().buffer();
-        content.writeBytes(CustHttp2Handler.RESPONSE_BYTES.duplicate());
-        ByteBufUtil.writeUtf8(content, " - 使用 " + req.protocolVersion() + " (" + establishApproach + ")");
+        content.writeBytes(RESPONSE_BYTES.duplicate());
+        ByteBufUtil.writeAscii(content, " - 使用 " + req.protocolVersion() + " (" + establishApproach + ")");
 
         FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
         response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
