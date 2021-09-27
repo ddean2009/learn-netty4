@@ -71,7 +71,6 @@ public class MultiplexHttp2ServerInitializer extends ChannelInitializer<SocketCh
     private void configureClearText(SocketChannel ch) {
         final ChannelPipeline p = ch.pipeline();
         final HttpServerCodec sourceCodec = new HttpServerCodec();
-
         p.addLast(sourceCodec);
         p.addLast(new HttpServerUpgradeHandler(sourceCodec, upgradeCodecFactory));
         p.addLast(new SimpleChannelInboundHandler<HttpMessage>() {
