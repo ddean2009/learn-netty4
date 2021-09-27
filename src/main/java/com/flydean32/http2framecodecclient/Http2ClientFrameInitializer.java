@@ -1,5 +1,5 @@
 
-package com.flydean31.http2client;
+package com.flydean32.http2framecodecclient;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
