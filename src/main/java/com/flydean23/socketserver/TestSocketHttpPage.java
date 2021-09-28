@@ -7,6 +7,7 @@ import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.URL;
 
 /**
  * 读取html页面的数据，展示给用户
@@ -15,7 +16,10 @@ import java.io.*;
 public final class TestSocketHttpPage {
 
     public static ByteBuf getContent() throws IOException {
-        File file = new File("socket.html");
+        URL url= TestSocketHttpPage.class.getClassLoader().getResource("socket.html");
+        log.info("url: {}",url);
+        String filePath = url.getFile();
+        File file = new File(filePath);
         log.info(file.getCanonicalPath());
         FileReader fileReader = new FileReader(file);
         BufferedReader reader  = new BufferedReader(fileReader);

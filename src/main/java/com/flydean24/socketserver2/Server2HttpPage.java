@@ -10,12 +10,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 
 @Slf4j
 public final class Server2HttpPage {
 
     public static ByteBuf getContent() throws IOException {
-        File file = new File("socket2.html");
+        URL url= Server2HttpPage.class.getClassLoader().getResource("socket2.html");
+        log.info("url: {}",url);
+        String filePath = url.getFile();
+        File file = new File(filePath);
         log.info(file.getCanonicalPath());
         FileReader fileReader = new FileReader(file);
         BufferedReader reader  = new BufferedReader(fileReader);
