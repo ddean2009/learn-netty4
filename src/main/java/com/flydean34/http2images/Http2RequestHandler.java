@@ -43,7 +43,7 @@ public class Http2RequestHandler extends SimpleChannelInboundHandler<FullHttpReq
     private void handleImage(String id, ChannelHandlerContext ctx, String streamId,
             FullHttpRequest request) {
         ByteBuf image = ImagePage.getImage(parseInt(id));
-        FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, image.duplicate());
+        FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, image);
         response.headers().set(CONTENT_TYPE, "image/jpeg");
         sendResponse(ctx, streamId, response, request);
     }
