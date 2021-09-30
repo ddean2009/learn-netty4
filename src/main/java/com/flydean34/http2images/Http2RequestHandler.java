@@ -10,6 +10,7 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.QueryStringDecoder;
 import io.netty.handler.codec.http2.HttpConversionUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +25,7 @@ import static java.lang.Integer.parseInt;
 /**
  * 支持http2的处理器，因为添加了InboundHttp2ToHttpAdapter对http2的消息格式进行了转换，所以这里处理的是FullHttpRequest
  */
+@Slf4j
 public class Http2RequestHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
     private static final String IMAGE_ID = "id";
@@ -72,7 +74,8 @@ public class Http2RequestHandler extends SimpleChannelInboundHandler<FullHttpReq
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        // 异常处理
+        log.error("出现异常",cause);
         ctx.close();
     }
 
