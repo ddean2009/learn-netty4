@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Sharable
 @Slf4j
-public class MsgEchoServerHandler extends ChannelInboundHandlerAdapter {
+public class UDTMsgEchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {

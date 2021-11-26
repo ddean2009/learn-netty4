@@ -15,13 +15,13 @@ import java.nio.charset.StandardCharsets;
  * UDT message客户端处理器
  */
 @Slf4j
-public class MsgEchoClientHandler extends SimpleChannelInboundHandler<UdtMessage> {
+public class UDTMsgEchoClientHandler extends SimpleChannelInboundHandler<UdtMessage> {
 
     private final UdtMessage message;
 
-    public MsgEchoClientHandler() {
+    public UDTMsgEchoClientHandler() {
         super(false);
-        final ByteBuf byteBuf = Unpooled.buffer(MsgEchoClient.SIZE);
+        final ByteBuf byteBuf = Unpooled.buffer(UDTMsgEchoClient.SIZE);
         byteBuf.writeBytes("www.flydean.com".getBytes(StandardCharsets.UTF_8));
         message = new UdtMessage(byteBuf);
     }

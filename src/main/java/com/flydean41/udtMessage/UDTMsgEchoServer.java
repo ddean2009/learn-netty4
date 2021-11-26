@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * UDT Message 服务器端
  */
-public final class MsgEchoServer {
+public final class UDTMsgEchoServer {
 
     static final int PORT =8000;
 
@@ -41,7 +41,7 @@ public final class MsgEchoServer {
                                 throws Exception {
                             ch.pipeline().addLast(
                                     new LoggingHandler(LogLevel.INFO),
-                                    new MsgEchoServerHandler());
+                                    new UDTMsgEchoServerHandler());
                         }
                     });
             // 启动服务器

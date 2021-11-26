@@ -17,9 +17,9 @@ import java.util.logging.Logger;
 /**
  * UDT Message客户端
  */
-public final class MsgEchoClient {
+public final class UDTMsgEchoClient {
 
-    private static final Logger log = Logger.getLogger(MsgEchoClient.class.getName());
+    private static final Logger log = Logger.getLogger(UDTMsgEchoClient.class.getName());
 
     static final String HOST = "127.0.0.1";
     static final int PORT = 8000;
@@ -41,7 +41,7 @@ public final class MsgEchoClient {
                                 throws Exception {
                             ch.pipeline().addLast(
                                     new LoggingHandler(LogLevel.INFO),
-                                    new MsgEchoClientHandler());
+                                    new UDTMsgEchoClientHandler());
                         }
                     });
             // 启动客户端
