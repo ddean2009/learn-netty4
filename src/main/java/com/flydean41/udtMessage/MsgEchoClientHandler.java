@@ -1,37 +1,39 @@
 
-package com.flydean40.udtByte;
+package com.flydean41.udtMessage;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.udt.UdtMessage;
 import io.netty.channel.udt.nio.NioUdtProvider;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 
 /**
- * 客户端处理器
+ * UDT message客户端处理器
  */
 @Slf4j
-public class UDTByteEchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
+public class MsgEchoClientHandler extends SimpleChannelInboundHandler<UdtMessage> {
 
-    private final ByteBuf message;
+    private final UdtMessage message;
 
-    public UDTByteEchoClientHandler() {
+    public MsgEchoClientHandler() {
         super(false);
-        message = Unpooled.buffer(UDTByteEchoClient.SIZE);
-        message.writeBytes("www.flydean.com".getBytes(StandardCharsets.UTF_8));
+        final ByteBuf byteBuf = Unpooled.buffer(MsgEchoClient.SIZE);
+        byteBuf.writeBytes("www.flydean.com".getBytes(StandardCharsets.UTF_8));
+        message = new UdtMessage(byteBuf);
     }
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
-        log.info("channel active {}" , NioUdtProvider.socketUDT(ctx.channel()).toStringOptions());
+        log.info("channel active {}", NioUdtProvider.socketUDT(ctx.channel()).toStringOptions());
         ctx.writeAndFlush(message);
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
+    public void channelRead0(ChannelHandlerContext ctx, UdtMessage msg) {
         ctx.write(msg);
     }
 
@@ -45,5 +47,4 @@ public class UDTByteEchoClientHandler extends SimpleChannelInboundHandler<ByteBu
         log.error(cause.getMessage(),cause);
         ctx.close();
     }
-
 }
