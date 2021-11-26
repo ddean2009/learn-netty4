@@ -1,5 +1,5 @@
 
-package com.flydean40.udtecho;
+package com.flydean40.udtByte;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Sharable
 @Slf4j
-public class UDTEchoServerHandler extends ChannelInboundHandlerAdapter {
+public class UDTByteEchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {

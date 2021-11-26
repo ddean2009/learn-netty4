@@ -1,5 +1,5 @@
 
-package com.flydean40.udtecho;
+package com.flydean40.udtByte;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -16,7 +16,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * UDT 客户端
  */
-public final class UDTEchoClient {
+public final class UDTByteEchoClient {
 
     static final String HOST = "127.0.0.1";
     static final int PORT = 8000;
@@ -36,7 +36,7 @@ public final class UDTEchoClient {
                         public void initChannel(final UdtChannel ch) {
                             ch.pipeline().addLast(
                                     new LoggingHandler(LogLevel.INFO),
-                                    new UDTEchoClientHandler());
+                                    new UDTByteEchoClientHandler());
                         }
                     });
             // 启动客户端

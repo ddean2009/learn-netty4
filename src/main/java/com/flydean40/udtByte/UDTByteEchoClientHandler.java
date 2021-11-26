@@ -1,5 +1,5 @@
 
-package com.flydean40.udtecho;
+package com.flydean40.udtByte;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -14,13 +14,13 @@ import java.nio.charset.StandardCharsets;
  * 客户端处理器
  */
 @Slf4j
-public class UDTEchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
+public class UDTByteEchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private final ByteBuf message;
 
-    public UDTEchoClientHandler() {
+    public UDTByteEchoClientHandler() {
         super(false);
-        message = Unpooled.buffer(UDTEchoClient.SIZE);
+        message = Unpooled.buffer(UDTByteEchoClient.SIZE);
         message.writeBytes("www.flydean.com".getBytes(StandardCharsets.UTF_8));
     }
 

@@ -1,5 +1,5 @@
 
-package com.flydean40.udtecho;
+package com.flydean40.udtByte;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * 一个支持UDT协议的服务器，简单的返回客户端发送的数据
  */
-public final class UDTEchoServer {
+public final class UDTByteEchoServer {
 
     static final int PORT = Integer.parseInt(System.getProperty("port", "8000"));
 
@@ -39,7 +39,7 @@ public final class UDTEchoServer {
                         public void initChannel(final UdtChannel ch) {
                             ch.pipeline().addLast(
                                     new LoggingHandler(LogLevel.INFO),
-                                    new UDTEchoServerHandler());
+                                    new UDTByteEchoServerHandler());
                         }
                     });
             // 开启服务
