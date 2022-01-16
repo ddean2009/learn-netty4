@@ -17,6 +17,8 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        log.info("accepted channel: {}", ctx.channel());
+        log.info("accepted channel parent: {}", ctx.channel().parent());
         // channel活跃
         ctx.write("Channel Active状态!\r\n");
         ctx.flush();

@@ -7,6 +7,7 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,6 +15,7 @@ import java.io.InputStreamReader;
 /**
  * 聊天室客户端
  */
+@Slf4j
 public final class ChatClient {
 
     static final String HOST = System.getProperty("host", "127.0.0.1");
@@ -30,6 +32,7 @@ public final class ChatClient {
 
             // 建立连接
             Channel ch = b.connect(HOST, PORT).sync().channel();
+            log.info("client channel: {}", ch);
 
             // 从命令行输入
             ChannelFuture lastWriteFuture = null;

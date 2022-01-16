@@ -14,6 +14,7 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        log.info("client accepted channel: {}", ctx.channel());
         log.info("接收到消息:{}",msg);
     }
 
