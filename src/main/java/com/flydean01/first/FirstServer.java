@@ -38,7 +38,6 @@ public class FirstServer {
 
             // 绑定端口并开始接收连接
             ChannelFuture f = b.bind(port).sync();
-
             // 等待server socket关闭
             f.channel().closeFuture().sync();
         } finally {

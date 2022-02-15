@@ -21,12 +21,6 @@ public class FirstServerHandler extends ChannelInboundHandlerAdapter {
         }finally {
             ReferenceCountUtil.release(msg);
         }
-
-//        try {
-//            // 消息处理
-//        } finally {
-//            ReferenceCountUtil.release(msg);
-//        }
     }
 
     @Override
