@@ -1,5 +1,4 @@
-
-package com.flydean52.nativetransport;
+package com.flydean52.nativetransport.kqueue;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -10,24 +9,25 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 /**
- * 初始化一个ChannelPipeline
+ * 客户端ChannelPipeline的配置
  */
-public class NativeChatServerInitializer extends ChannelInitializer<SocketChannel> {
+public class NativeChatClientInitializer extends ChannelInitializer<SocketChannel> {
 
     private static final StringDecoder DECODER = new StringDecoder();
     private static final StringEncoder ENCODER = new StringEncoder();
 
-    private static final NativeChatServerHandler SERVER_HANDLER = new NativeChatServerHandler();
+    private static final NativeChatClientHandler CLIENT_HANDLER = new NativeChatClientHandler();
 
     @Override
-    public void initChannel(SocketChannel ch) throws Exception {
+    public void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
+
         // 添加行分割器
         pipeline.addLast(new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
-        // 添加String Decoder和String Encoder,用来进行字符串的转换
         pipeline.addLast(DECODER);
         pipeline.addLast(ENCODER);
-        // 最后添加真正的处理器
-        pipeline.addLast(SERVER_HANDLER);
+
+        // 添加客户端处理器
+        pipeline.addLast(CLIENT_HANDLER);
     }
 }
