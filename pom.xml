@@ -78,15 +78,15 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-tcnative -->
         <!--  This artifact is dynamically linked to OpenSSL and Apache APR.-->
-<!--        <dependency>-->
-<!--            <groupId>io.netty</groupId>-->
-<!--            <artifactId>netty-tcnative</artifactId>-->
-<!--            <version>2.0.40.Final</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative</artifactId>
+            <version>2.0.51.Final</version>
+        </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-tcnative-boringssl-static</artifactId>
-            <version>2.0.40.Final</version>
+            <version>2.0.51.Final</version>
         </dependency>
 
         <dependency>

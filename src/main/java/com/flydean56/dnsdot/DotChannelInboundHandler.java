@@ -1,4 +1,4 @@
-package com.flydean55.dnsudp;
+package com.flydean56.dnsdot;
 
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,9 +8,9 @@ import io.netty.util.NetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class Do53UdpChannelInboundHandler extends SimpleChannelInboundHandler<DatagramDnsResponse> {
+class DotChannelInboundHandler extends SimpleChannelInboundHandler<DefaultDnsResponse> {
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, DatagramDnsResponse msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, DefaultDnsResponse msg) {
         try {
             readMsg(msg);
         } finally {
@@ -18,7 +18,7 @@ class Do53UdpChannelInboundHandler extends SimpleChannelInboundHandler<DatagramD
         }
     }
 
-    private static void readMsg(DatagramDnsResponse msg) {
+    private static void readMsg(DefaultDnsResponse msg) {
         if (msg.count(DnsSection.QUESTION) > 0) {
             DnsQuestion question = msg.recordAt(DnsSection.QUESTION, 0);
             log.info("question is :{}", question);
