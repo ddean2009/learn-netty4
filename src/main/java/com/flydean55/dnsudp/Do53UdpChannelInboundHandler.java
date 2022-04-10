@@ -1,4 +1,4 @@
-package com.flydean54.dnstcp;
+package com.flydean55.dnsudp;
 
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,9 +8,9 @@ import io.netty.util.NetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class Do53ChannelInboundHandler extends SimpleChannelInboundHandler<DefaultDnsResponse> {
+class Do53UdpChannelInboundHandler extends SimpleChannelInboundHandler<DatagramDnsResponse> {
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, DefaultDnsResponse msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, DatagramDnsResponse msg) {
         try {
             readMsg(msg);
         } finally {
@@ -18,20 +18,18 @@ class Do53ChannelInboundHandler extends SimpleChannelInboundHandler<DefaultDnsRe
         }
     }
 
-    private static void readMsg(DefaultDnsResponse msg) {
+    private static void readMsg(DatagramDnsResponse msg) {
         if (msg.count(DnsSection.QUESTION) > 0) {
             DnsQuestion question = msg.recordAt(DnsSection.QUESTION, 0);
-            log.info("question is :{}",question);
+            log.info("question is :{}", question);
         }
-        int i = 0, count = msg.count(DnsSection.ANSWER);
-        while (i < count) {
+        for (int i = 0, count = msg.count(DnsSection.ANSWER); i < count; i++) {
             DnsRecord record = msg.recordAt(DnsSection.ANSWER, i);
-            //A记录用来指定主机名或者域名对应的IP地址
             if (record.type() == DnsRecordType.A) {
+                //A记录用来指定主机名或者域名对应的IP地址
                 DnsRawRecord raw = (DnsRawRecord) record;
-                log.info("ip address is: {}",NetUtil.bytesToIpAddress(ByteBufUtil.getBytes(raw.content())));
+                System.out.println(NetUtil.bytesToIpAddress(ByteBufUtil.getBytes(raw.content())));
             }
-            i++;
         }
     }
 }
