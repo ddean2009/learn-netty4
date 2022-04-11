@@ -6,7 +6,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.dns.TcpDnsQueryEncoder;
 import io.netty.handler.codec.dns.TcpDnsResponseDecoder;
 
-class Do53TcpChannelInitializer extends ChannelInitializer<SocketChannel> {
+public class Do53TcpChannelInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline p = ch.pipeline();
