@@ -49,16 +49,16 @@ public final class SctpMultiHomingChatClient {
                     });
 
             InetSocketAddress localAddress = SocketUtils.socketAddress(clientPrimaryAddress, clientPort);
-            InetAddress localSecondaryAddress = SocketUtils.addressByName(clientSecondAddress);
-
-            InetSocketAddress remoteAddress = SocketUtils.socketAddress(serverAddress, serverPort);
-
             // 绑定第一个address
             ChannelFuture bindFuture = b.bind(localAddress).sync();
-            SctpChannel channel = (SctpChannel) bindFuture.channel();
 
+            SctpChannel channel = (SctpChannel) bindFuture.channel();
+            InetAddress localSecondaryAddress = SocketUtils.addressByName(clientSecondAddress);
             // 绑定第二个address
             channel.bindAddress(localSecondaryAddress).sync();
+
+            //连接到服务器
+            InetSocketAddress remoteAddress = SocketUtils.socketAddress(serverAddress, serverPort);
             ChannelFuture connectFuture = channel.connect(remoteAddress).sync();
 
             connectFuture.channel().closeFuture().sync();
