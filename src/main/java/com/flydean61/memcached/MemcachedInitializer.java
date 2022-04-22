@@ -1,4 +1,4 @@
-package com.flydean60.memcached;
+package com.flydean61.memcached;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
