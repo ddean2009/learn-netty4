@@ -47,6 +47,7 @@ public class MqttClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(connectMessage);
     }
 
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
