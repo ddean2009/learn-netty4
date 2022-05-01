@@ -114,6 +114,18 @@
 <!--            <classifier>osx-x86_64</classifier>-->
 <!--        </dependency>-->
 
+        <!-- OCSP  依赖-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.69</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.69</version>
+        </dependency>
+
     </dependencies>
 
 </project>
