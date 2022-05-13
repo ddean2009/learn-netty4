@@ -1,6 +1,33 @@
 # learn-netty4
 跟我一起学netty4.X
 
+## LICENSE
+
+Copyright 2022 learn-netty4 Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-------------------------------------------------------------------------------
+This project contains a modified portion of 'Netty Project',an asynchronous
+event-driven network application framework,which can be obtained at:
+
+* LICENSE:
+  * license/LICENSE.netty.txt (Apache License 2.0)
+* HOMEPAGE:
+  * https://github.com/netty/netty
+
+## 本项目的内容
+
 毕生的收藏都在这了,看得上的小伙伴点个star吧 ![Github stars](https://img.shields.io/github/stars/ddean2009/learn-netty4.svg)
 
 系列文章请参考：[netty系列教程](http://www.flydean.com/category/%e5%93%8d%e5%ba%94%e5%bc%8f%e7%b3%bb%e7%bb%9f/netty/)
@@ -47,27 +74,3 @@
 * [37 Netty Cust Socks Server](http://www.flydean.com/37-netty-cust-socks-server)
 * [38 Netty Cust Port Unification](http://www.flydean.com/38-netty-cust-port-unification)
 
-## LICENSE
-
-Copyright 2022 learn-netty4 Project
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
--------------------------------------------------------------------------------
-This project contains a modified portion of 'Netty Project',an asynchronous
-event-driven network application framework,which can be obtained at:
-
-* LICENSE:
-    * license/LICENSE.netty.txt (Apache License 2.0)
-* HOMEPAGE:
-    * https://github.com/netty/netty
