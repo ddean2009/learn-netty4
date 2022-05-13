@@ -1,7 +1,7 @@
 /*
- * Copyright 2012 The Netty Project
+ * Copyright 2022 learn-netty4 Project
  *
- * The Netty Project licenses this file to you under the Apache License,
+ * The learn-netty4 Project licenses this file to you under the Apache License,
  * version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at:
  *
